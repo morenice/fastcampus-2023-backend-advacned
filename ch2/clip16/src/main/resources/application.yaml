@@ -1,0 +1,12 @@
+spring:
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/fastsns
+    username: root
+    password: fastcampus
+  jpa:
+    hibernate.ddl-auto: update
+    show-sql: true
