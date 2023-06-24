@@ -1,0 +1,50 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.8'
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+tasks.withType(Test).all {
+	if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_13)) {
+		jvmArgs += [
+				"-XX:+AllowRedefinitionToAddDeleteMethods"
+		]
+	}
+}
+
+dependencies {
+	implementation 'io.netty:netty-resolver-dns-native-macos:4.1.94.Final:osx-aarch_64'
+
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+	implementation "io.asyncer:r2dbc-mysql:1.0.2"
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation 'io.projectreactor.tools:blockhound:1.0.8.RELEASE'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

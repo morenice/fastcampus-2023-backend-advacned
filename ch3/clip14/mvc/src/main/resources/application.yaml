@@ -1,0 +1,22 @@
+server:
+  port: 9000
+  tomcat:
+    max-connections: 10000
+    accept-count: 1000
+    threads:
+      max: 3000
+      min-spare: 1000
+
+logging:
+  level:
+    root: INFO
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/fastsns
+    username: root
+    password: fastcampus
+  data:
+    redis:
+      host: localhost
+      port: 6379
