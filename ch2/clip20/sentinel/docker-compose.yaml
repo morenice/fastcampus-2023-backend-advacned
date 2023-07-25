@@ -38,3 +38,34 @@ services:
       - ./conf:/usr/local/etc/redis/
     command: redis-server /usr/local/etc/redis/redis.conf
     restart: always
+
+  sentinel:
+    container_name: sentinel
+    image: redis:6.2
+    networks:
+      - replica
+    volumes:
+      - ./conf:/usr/local/etc/redis/
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    restart: always
+
+  sentinel2:
+    container_name: sentinel2
+    image: redis:6.2
+    networks:
+      - replica
+    volumes:
+      - ./conf:/usr/local/etc/redis/
+    command: redis-sentinel /usr/local/etc/redis/sentinel2.conf
+    restart: always
+
+  sentinel3:
+    container_name: sentinel3
+    image: redis:6.2
+    networks:
+      - replica
+    volumes:
+      - ./conf:/usr/local/etc/redis/
+    command: redis-sentinel /usr/local/etc/redis/sentinel3.conf
+    restart: always
+
